@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+/* body {
+    background-color: #ffffff;
+    background-attachment: fixed;
+    background-size: cover;
+    height:50em; background-size:cover; width:auto;
+    background-image:url('D:\M.Tech\SystemDesignProject_Vipin\Project_New\Project_New\my-first-app\src\environments\background.svg');
+    background-position:50% 50%;
+} */

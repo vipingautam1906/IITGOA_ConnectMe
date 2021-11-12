@@ -1,0 +1,7 @@
+mat-list-item:hover {
+    cursor: pointer;
+    background-color: ghostwhite;
+}
+.row{
+    position: fixed;
+}

@@ -1,0 +1,26 @@
+<br>
+<mat-card>
+  <form [formGroup]="registrationForm" >
+
+    <mat-form-field>
+      <input matInput name="Email" type="email"  placeholder="Email Id" formControlName="email" 
+        [ngClass]="{'is-invalid': registrationForm.get('email').touched && registrationForm.get('email').invalid }">
+      <mat-error *ngIf="registrationForm.get('email').touched && registrationForm.get('email').invalid ">
+        <p *ngIf="registrationForm.get('email').errors.required ">Email Address is required</p>
+        <p *ngIf="registrationForm.get('email').errors.email ">Email must be a valid Email Address</p> 
+        <p *ngIf="registrationForm.get('email').errors.emailDomain ">Use your IIT Goa email only</p>  
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput name="password" type="password"  placeholder="Password" formControlName="pass" 
+        [ngClass]="{'is-invalid': registrationForm.get('pass').touched && registrationForm.get('pass').invalid }">
+      <mat-error *ngIf="registrationForm.get('pass').touched && registrationForm.get('pass').invalid ">
+        <p *ngIf="registrationForm.get('pass').errors.required">Password field cannot be left empty</p>
+        <p *ngIf="registrationForm.get('pass').errors.minlength" >Password length should be atleast 6 characters</p>      
+      </mat-error>
+    </mat-form-field>
+   
+    <button mat-raised-button color="accent" type="submit"  (click)="onLogin()" [disabled]="!registrationForm.valid">Login</button>
+  </form>
+</mat-card>

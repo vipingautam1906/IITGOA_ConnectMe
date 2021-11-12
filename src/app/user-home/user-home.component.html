@@ -1,0 +1,21 @@
+<br>
+<div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+  <ng-container *ngIf = "InputFromParent == 'createPost'">
+    <app-post-create></app-post-create>
+  </ng-container>
+  <ng-container *ngIf = "InputFromParent == 'feeds'">
+    <app-post-list></app-post-list>
+  </ng-container>
+  <ng-container *ngIf = "InputFromParent == 'recentActivity'">
+    <p>Some College news will be here</p>
+  </ng-container>
+
+  <ng-container *ngIf = "InputFromParent == 'pass'">  
+    <app-update-password></app-update-password>
+  </ng-container>
+
+  <ng-container *ngIf = "InputFromParent == 'userPosts'">
+    <app-user-posts></app-user-posts>
+  </ng-container>
+</div>
+

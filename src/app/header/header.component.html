@@ -1,0 +1,30 @@
+<mat-toolbar color="primary">
+  <img mat-card-image src="/assets/logo.png" >
+    <span class="spacer"></span>
+    <ul>
+    <li *ngIf=userIsAuthenticated><a routerLink="/login">Login</a></li>
+    <li *ngIf=userIsAuthenticated><a routerLink="/signup">Sign Up</a></li>
+    <li *ngIf=userIsAuthenticated><button (click)="onLogout()" mat-button>Log Out</button></li>
+    </ul>
+</mat-toolbar>
+
+<div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start" *ngIf=!userIsAuthenticated>
+  <ng-container>
+    <app-card fxFlex="0 1 calc(20% - 32px)" >
+      <app-left-panel (clickInLeftSidePanel) = "onclickleftsidepanel($event)"></app-left-panel>
+    </app-card>
+  </ng-container>
+  <ng-container>
+    <app-card fxFlex="1 1 calc(32.3% - 10px)">
+      <app-user-home [InputFromParent] = 'msgfromLeftpanel' ></app-user-home>
+    </app-card>
+  </ng-container>
+  <ng-container>
+    <app-card fxFlex="0 1 calc(33.3% - 32px)" >
+    <app-profile-tab (clickInProfileTab) = "onclickProfileTab($event)"></app-profile-tab>
+    </app-card>
+  </ng-container>
+</div>
+
+
+
