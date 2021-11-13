@@ -11,7 +11,10 @@ router.post('/signup',(req,res,next)=>{
      .then(hash=>{
          const user=new User({
              email : req.body.email,
-             password: hash
+             password: hash,
+             fname : req.body.fname,
+             lname : req.body.lname,
+             about : req.body.aboutMe
          })
          user.save()
            .then(result=>{
