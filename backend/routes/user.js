@@ -58,4 +58,43 @@ router.post('/login',(req,res,next)=>{
      })
 })
 
+router.post('/updatePass',(req,res,next)=>{
+   const userId=req.body.userId;
+   let fetchedUser;
+   User.findOne({_id: userId})
+      .then(user=>{
+        if(!user)
+        return res.status(404).json({
+           message : "User with this id does not exist"
+       })
+       fetchedUser=user;
+       return bcrypt.compare(req.body.currentPassword,user.password)  
+      })
+      .then(result=>{
+        if(!result)
+          return res.status(401).json({
+              message : 'Wrong password entered!'
+          })
+        bcrypt.hash(req.body.password,10)
+      })
+       .then(hash=>{
+          User.updateOne({_id : req.body.userId},{password : hash})
+                .then(result=>{
+                    if(result.modifiedCount>0)
+                    {
+                      res.status(200).json({message : "Password Update Successful"});
+                    }
+                    else
+                    {
+                      res.status(500).json({message : "Failed to update Password, please try again later"});
+                    }
+                })
+                .catch(err=>{
+                    res.status(500).json({
+                        error : err
+                    })
+                })
+       })    
+})
+
 module.exports = router;
