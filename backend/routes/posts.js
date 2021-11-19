@@ -117,4 +117,26 @@ router.delete('/:id',auth,(req,res,next)=>{
        });
 });
 
+router.post('/comment',auth,(req,res,next)=>{
+   const postId=req.body.postId;
+   const userId=req.body.userId;
+   const message=req.body.message;
+   let cmnt=[];
+   Post.findOne({_id : postId})
+      .then(post=>{
+        cmnt=[...post.comments];
+        User.findOne({_id : userId})
+          .then(user=>{
+            cmnt.push({userId : userId, name : user.fname, message : message});
+            Post.updateOne({_id : postId},{comment : cmnt})
+               .then(result=>{
+                 res.status(200).json({ message : "Comment Added Successfully!"});
+               })
+          })
+      })
+      .catch(err=>{
+         res.status(500).json({message : "Failed to add the comment, please try again!"})        
+      })
+});
+
 module.exports=router;
