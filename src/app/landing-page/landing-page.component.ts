@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 import { LandingService } from './landing.service';
 
 @Component({
@@ -10,7 +11,8 @@ export class LandingPageComponent implements OnInit {
   quoteArray:any;
   dailyQuote: string;
   quoteAuther: string;
-constructor(private landingSer: LandingService ) { }
+constructor(private landingSer: LandingService, private authSer: AuthService ) { }
+
   ngOnInit() {
     this.landingSer.getQuotes()
         .subscribe( data=>{
@@ -18,5 +20,6 @@ constructor(private landingSer: LandingService ) { }
             this.dailyQuote = this.quoteArray.contents.quotes[0].quote;
             this.quoteAuther = this.quoteArray.contents.quotes[0].author;
     })
+
 }
 }

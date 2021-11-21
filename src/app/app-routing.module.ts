@@ -9,7 +9,7 @@ import { PostCreateComponent } from "./posts/post-create/post-create.component";
 import { UserHomeComponent } from "./user-home/user-home.component";
 
 const routes: Routes= [
-    {path : '', component : LandingPageComponent},
+    {path : 'landing', component : LandingPageComponent},
     {path : 'create', component : PostCreateComponent, canActivate : [AuthGuard]},
     {path : 'edit/:postId', component : PostCreateComponent, canActivate : [AuthGuard]},
     {path : 'login', component : LoginComponent},

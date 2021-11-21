@@ -10,6 +10,8 @@ export class AuthService{
   private authStatusListener=new Subject<boolean>();
   userId : string;
   emailId : string;
+  userName : string;
+  aboutMe : string;
 
   constructor(private http : HttpClient,private router : Router){ }
 
@@ -34,7 +36,8 @@ export class AuthService{
   }
 
   createUser(fname : string, lname : string, email : string, pass : string, aboutMe : string ){
-    const authData={fname : fname,lname : lname, email : email, pass: pass, aboutMe : aboutMe };
+    const authData={fname : fname,lname : lname, email : email, password: pass, aboutMe : aboutMe };
+
     this.http.post('http://localhost:5000/api/user/signup',authData)
        .subscribe(response=>{
            console.log(response);
@@ -60,7 +63,7 @@ export class AuthService{
                this.isAuthenticated=true;
                this.authStatusListener.next(true);
            }
-           this.router.navigate(['/']);
+           this.router.navigate(['home']);
        });
   }
 
@@ -69,7 +72,7 @@ export class AuthService{
       this.isAuthenticated=false;
       this.authStatusListener.next(false);
       this.userId=null;
-      this.router.navigate(['/']);
+      this.router.navigate(['landing']);
   }
 
   autoAuthenticateUser(){
