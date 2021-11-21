@@ -10,7 +10,8 @@ export class AuthService{
   private authStatusListener=new Subject<boolean>();
   userId : string;
   emailId : string;
-  userName : string;
+  fname : string;
+  lname : string;
   aboutMe : string;
 
   constructor(private http : HttpClient,private router : Router){ }
@@ -35,6 +36,13 @@ export class AuthService{
       return this.userId;
   }
 
+  getCurrentLoggedInUser(){
+    const currentUser = {
+        fname : this.fname, lname : this.lname, email : this.emailId, aboutMe : this.aboutMe 
+    }
+    return currentUser
+  }
+
   createUser(fname : string, lname : string, email : string, pass : string, aboutMe : string ){
     const authData={fname : fname,lname : lname, email : email, password: pass, aboutMe : aboutMe };
 
@@ -47,9 +55,22 @@ export class AuthService{
 
   login(email : string, password : string){
       const loginData={email : email,password : password};
-      this.http.post<{token : string, expiresIn : number, userId : string}>('http://localhost:5000/api/user/login',loginData)
+      this.http.post<{
+          token : string, 
+          expiresIn : number, 
+          userId : string, 
+          fname : string, 
+          lname : string, 
+          email : string, 
+          aboutMe : string,  
+        }>('http://localhost:5000/api/user/login',loginData)
        .subscribe(response=>{
            this.token=response.token;
+           this.fname = response.fname;
+           this.lname = response.lname;
+           this.emailId = response.email;
+           this.aboutMe = response.aboutMe;
+           
            const expiresInDuration=response.expiresIn;
            this.userId=response.userId;
            if(this.token)

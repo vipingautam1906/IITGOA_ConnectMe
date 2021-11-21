@@ -46,12 +46,15 @@ router.post('/login',(req,res,next)=>{
           return res.status(401).json({
               message : 'Wrong password entered!'
           })
-          
          const token=jwt.sign({email : req.body.email,userId : fetchedUser._id},"secret_key",{expiresIn: "1h"});
          res.status(200).json({
              token : token,
              expiresIn : 3600,
-             userId : fetchedUser._id
+             userId : fetchedUser._id,
+             fname : fetchedUser.fname,
+             lname : fetchedUser.lname,
+             email : fetchedUser.email,
+             aboutMe : fetchedUser.about
          })
      })
      .catch(err=>{
