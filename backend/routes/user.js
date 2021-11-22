@@ -81,7 +81,7 @@ router.post('/updatePass',(req,res,next)=>{
           return res.status(401).json({
               message : 'Wrong password entered!'
           })
-        bcrypt.hash(req.body.password,10)
+        bcrypt.hash(req.body.updatedPassword,10)
       })
        .then(hash=>{
           User.updateOne({_id : req.body.userId},{password : hash})
