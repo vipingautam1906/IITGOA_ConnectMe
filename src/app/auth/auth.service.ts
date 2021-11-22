@@ -84,7 +84,7 @@ export class AuthService{
                this.isAuthenticated=true;
                this.authStatusListener.next(true);
            }
-           this.router.navigate(['home']);
+           this.router.navigate(['/home']);
        });
   }
 
@@ -93,7 +93,7 @@ export class AuthService{
       this.isAuthenticated=false;
       this.authStatusListener.next(false);
       this.userId=null;
-      this.router.navigate(['landing']);
+      this.router.navigate(['/landing']);
   }
 
   autoAuthenticateUser(){

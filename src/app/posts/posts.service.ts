@@ -36,10 +36,11 @@ export class PostsService
        
        this.http.put('http://localhost:5000/api/posts/'+id,postData)
               .subscribe((response)=>{
-                  this.router.navigate(['/']);
+                  this.router.navigate(['/home']);
               })
     }
 
+   
     getPosts(pageSize : number,pageNumber : number)
     { 
       const queryParams=`?pagesize=${pageSize}&page=${pageNumber}`;

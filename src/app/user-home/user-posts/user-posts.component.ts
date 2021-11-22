@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from 'src/app/auth/auth.service';
+import { PostsService } from 'src/app/posts/posts.service';
 import { UserpostService } from '../userpost.service';
 
 @Component({
@@ -11,8 +12,12 @@ import { UserpostService } from '../userpost.service';
 })
 export class UserPostsComponent implements OnInit {
   panelOpenState = false;
+  postId: any;
+  postTitle: string;
+  postContent: string;
+
   comment = new FormControl()
-  constructor(private authSer : AuthService, private userPostSer: UserpostService) { }
+  constructor(private postSer: PostsService ,private authSer : AuthService, private userPostSer: UserpostService) { }
 
   ngOnInit(): void {
   }

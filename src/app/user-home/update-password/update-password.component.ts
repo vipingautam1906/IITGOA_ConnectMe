@@ -29,10 +29,11 @@ export class UpdatePasswordComponent implements OnInit {
     this.isCurrentPassword = this.updatPassSer.updatePassword(currentPassword, newPassword, userId)
     
     if(this.isCurrentPassword === false ){
-      console.log("working")
       this._snackbar.open('Existing Password is incorrect','Retry changing Password')
     }
-  
+    else{
+      this._snackbar.open('New Password updated','Sucessfully!')
+    }
     this.udatePasswordForm.reset();
   }
   

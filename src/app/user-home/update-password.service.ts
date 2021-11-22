@@ -14,6 +14,7 @@ export class UpdatePasswordService {
         newPassword: newPassword,
         userId: userId
       }
+      console.log(passwordData)
       this.http.post<{Id: string}>('http://localhost:5000/api/user/updatePass',passwordData).subscribe(
         response=>{
           this.id = response.Id

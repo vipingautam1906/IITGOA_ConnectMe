@@ -81,18 +81,24 @@ router.post('/updatePass',(req,res,next)=>{
           return res.status(401).json({
               message : 'Wrong password entered!'
           })
-        bcrypt.hash(req.body.password,10)
+        bcrypt.hash(req.body.newPassword,10)
       })
        .then(hash=>{
-          User.updateOne({_id : req.body.userId},{password : hash})
+          User.updateOne({"_id" : req.body.userId}, {$set: {"password" : hash} })
                 .then(result=>{
-                    if(result.modifiedCount>0)
+                    if(result.modifiedCount > 0)
                     {
-                      res.status(200).json({message : "Password Update Successful"});
+                        console.log("true")
+                        res.status(200).json({
+                        userId : fetchedUser._id 
+                        });
                     }
                     else
                     {
-                      res.status(500).json({message : "Failed to update Password, please try again later"});
+                        console.log("false")
+                        res.status(500).json({
+                          message : "Failed to update Password, please try again later"
+                        });
                     }
                 })
                 .catch(err=>{
