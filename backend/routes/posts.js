@@ -128,7 +128,7 @@ router.post('/comment',auth,(req,res,next)=>{
         User.findOne({_id : userId})
           .then(user=>{
             cmnt.push({userId : userId, name : user.fname, message : message});
-            Post.updateOne({_id : postId},{comment : cmnt})
+            Post.updateOne({_id : postId},{$set : {comments : cmnt}})
                .then(result=>{
                  res.status(200).json({ message : "Comment Added Successfully!"});
                })
