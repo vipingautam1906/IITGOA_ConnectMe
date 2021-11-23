@@ -1,3 +1,4 @@
+import { PortalHostDirective } from '@angular/cdk/portal';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -5,7 +6,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UserpostService {
-
+  private comments = []
   constructor(private http: HttpClient) { }
 
   addCommentToPost(userId: any, commentData: any){
@@ -13,8 +14,13 @@ export class UserpostService {
       userId: userId,
       commentData: commentData
     }
-
-
   }
-  editCurrentPost(){}
+  
+  getAllComments(){
+    this.http.get<{message : string, comments: [] }>("").subscribe((res=>{
+      this.comments = res.comments;
+    }))
+    return this.comments;
+  }
+
 }

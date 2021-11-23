@@ -12,7 +12,6 @@ import { PostsService } from '../posts.service';
 })
 export class PostListComponent implements OnInit,OnDestroy {
 
-
 userIsAuthenticated=false;
 private authListenerSubs: Subscription;
 posts =[];
@@ -25,7 +24,7 @@ isLoading=true;
 
 totalPosts=0;
 postsPerPage=2;
-pageNumber=1;
+pageNumber=2;
 pageSizeOptions=[1,2,5,10];
 
  constructor(postsService : PostsService,private authService : AuthService)

@@ -1,27 +1,26 @@
-<div class = "tilefix">
-    <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
+<div class="tilefix">
+    <mat-accordion multi="true" >
+        <mat-expansion-panel *ngFor="let post of userPosts">
+          <mat-expansion-panel-header *ngIf="userIsAuthenticated && userId===post.creator">
             <mat-panel-title>
-              Post.title
+              {{ post.title }} {{ post._id }}
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <p>Here complete content will be shown about post</p>
-          <button mat-raised-button color="accent" (click)="onEditPost()" style="float: right;">Edit Post</button>
+          <p *ngIf="userIsAuthenticated && userId===post.creator">{{ post.content }}</p>
           <hr>
-          <div *ngIf = true>
-            <mat-form-field>
-                <mat-label>Add a comment?</mat-label>
-                <textarea matInput placeholder="Ex. It makes me feel..." [formControl] = "comment">
-                </textarea>
-            </mat-form-field>
-            <button mat-raised-button color="accent" (click)="onAdd()" >Add</button>
-            <mat-card>
-                <mat-card-subtitle> User.name </mat-card-subtitle>
-                <p>Loop through all the comments</p>
-            </mat-card>
-          </div> 
+          <mat-form-field>
+              <mat-label>Add a comment?</mat-label>
+              <textarea matInput placeholder="Ex. It makes me feel..." [formControl] = "comment">
+              </textarea>
+          </mat-form-field>
+          <button mat-raised-button color="accent" (click)="onAdd()" >Add</button>
+
+          <mat-card *ngFor="let comment of comments">
+              <mat-card-subtitle *ngIf="userIsAuthenticated && post._id === comment.postId"> User.name {{ comment.createrName }}</mat-card-subtitle>
+              <p *ngIf="userIsAuthenticated && post._id === comment.postId">{{ comment.content }}</p>
+          </mat-card>
+
         </mat-expansion-panel>
-      </mat-accordion>
-      <hr>
+    </mat-accordion>
+<mat-paginator [length]="totalPosts" [pageSize]="postsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"></mat-paginator>
 </div>

@@ -1,5 +1,12 @@
 .tilefix{
     position: absolute;
-    width: 45%;
-    height: 100%; 
+    width: 45%; 
+}
+
+mat-expansion-panel {
+    margin-top : 1rem;
+}
+
+textarea{
+    height: 50px;
 }
