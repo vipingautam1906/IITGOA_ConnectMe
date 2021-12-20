@@ -84,7 +84,7 @@ router.post('/updatePass',(req,res,next)=>{
         bcrypt.hash(req.body.newPassword,10)
       })
        .then(hash=>{
-          User.updateOne({"_id" : req.body.userId}, {$set: {"password" : hash} })
+          User.updateOne({_id : req.body.userId}, {$set: {password : hash}})
                 .then(result=>{
                     if(result.modifiedCount > 0)
                     {
