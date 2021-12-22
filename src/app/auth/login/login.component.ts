@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -12,6 +12,8 @@ export class LoginComponent implements OnInit{
   constructor(public authService : AuthService){ }
 
   ngOnInit(){
+   
+
     this.registrationForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email, emailDomain] ),
         pass: new FormControl('',[Validators.required, Validators.minLength(6)])

@@ -96,6 +96,7 @@ router.post('/updatePass',(req,res,next)=>{
                     else
                     {
                         console.log("false")
+                        console.log(res)
                         res.status(500).json({
                           message : "Failed to update Password, please try again later"
                         });

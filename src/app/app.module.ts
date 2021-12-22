@@ -10,6 +10,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTreeModule} from '@angular/material/tree';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
+
 
 import { AppComponent } from './app.component';
 import { PostCreateComponent } from './posts/post-create/post-create.component';
@@ -34,6 +38,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UpdateuserpostComponent } from './user-home/updateuserpost/updateuserpost.component';
+import { RecentactivitiesComponent } from './recentactivities/recentactivities.component';
 
 
 @NgModule({
@@ -50,7 +55,8 @@ import { UpdateuserpostComponent } from './user-home/updateuserpost/updateuserpo
     ProfileTabComponent,
     UpdatePasswordComponent,
     UserPostsComponent,
-    UpdateuserpostComponent
+    UpdateuserpostComponent,
+    RecentactivitiesComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +79,10 @@ import { UpdateuserpostComponent } from './user-home/updateuserpost/updateuserpo
     MatGridListModule,
     MDBBootstrapModule.forRoot(),
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule,
+    MatIconModule,
+    MatCarouselModule
   ],
   providers: [{provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi : true}],
   bootstrap: [AppComponent]

@@ -2,10 +2,60 @@
   <img mat-card-image src="/assets/logo.png" >
     <span class="spacer"></span>
     <ul>
-    <li *ngIf=!userIsAuthenticated><a routerLink="/login">Login</a></li>
-    <li *ngIf=!userIsAuthenticated><a routerLink="/signup">Sign Up</a></li>
-    <li *ngIf=userIsAuthenticated><button (click)="onLogout()" mat-button>Log Out</button></li>
+      <li *ngIf=!userIsAuthenticated>
+        <a routerLink="/login">Login</a>
+        <mat-icon>supervisor_account</mat-icon>
+      </li>
+      <li *ngIf=!userIsAuthenticated>
+        <a routerLink="/signup">Sign Up</a>
+        <mat-icon>portrait</mat-icon>
+      </li>
+      <li *ngIf=userIsAuthenticated>
+        <button (click)="onLogout()" mat-button class="mybuttons">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+
+        <button mat-button class="mybuttons" [matMenuTriggerFor] = "menu">
+          <mat-icon>keyboard_arrow_down</mat-icon>
+          <span>Courses</span>
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="goToLink('https://www.youtube.com/playlist?list=PLAGEUeZKOcuyx8W2FBRtLBkmNlRtmGZKl')" >
+            <mat-icon >bar_chart</mat-icon>
+            <span>Probablity and Statistics</span>
+          </button>
+          <button mat-menu-item (click)="goToLink('https://www.youtube.com/playlist?list=PLgOvAyZGFRoQZ0J5ggw5qyJ1h4Bzi_Tef')" >
+            <mat-icon>bubble_chart</mat-icon>
+            <span>Data Structures and Algorithms </span>
+          </button>
+  
+        </mat-menu>
+
+      </li>
     </ul>
+    
+  <button mat-button [matMenuTriggerFor]="menu" class="mybuttons">
+    <mat-icon>menu</mat-icon>
+  </button>
+    
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="goToLink('https://iitgoa.ac.in/')" >
+      <mat-icon >school</mat-icon>
+      <span>IITGoa WebSite</span>
+    </button>
+    <button mat-menu-item (click)="goToLink('https://twitter.com/IITGoaofficial')" >
+      <mat-icon>people</mat-icon>
+      <span>Twitter</span>
+    </button>
+    <button mat-menu-item (click)="goToLink('https://www.instagram.com/iitgoaoffical/')" >
+      <mat-icon>live_tv</mat-icon>
+      <span>Instagram</span>
+    </button>
+  </mat-menu>
+    
+
 </mat-toolbar>
 
 <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start" *ngIf=userIsAuthenticated>

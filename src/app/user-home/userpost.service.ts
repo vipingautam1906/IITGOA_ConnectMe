@@ -9,18 +9,15 @@ export class UserpostService {
   private comments = []
   constructor(private http: HttpClient) { }
 
-  addCommentToPost(userId: any, commentData: any){
+  addCommentToPost(userId: string, postId: string, message: any){
     const commentdata = {
       userId: userId,
-      commentData: commentData
+      postId: postId,
+      message: message
     }
+    this.http.post<{message: string}>("http://localhost:5000/api/posts/comment", commentdata).subscribe((res=>{
+      console.log(res.message)
+    }))
   }
   
-  getAllComments(){
-    this.http.get<{message : string, comments: [] }>("").subscribe((res=>{
-      this.comments = res.comments;
-    }))
-    return this.comments;
-  }
-
 }

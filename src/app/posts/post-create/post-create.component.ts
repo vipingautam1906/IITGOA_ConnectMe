@@ -2,6 +2,7 @@ import { Component,EventEmitter,OnInit,Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { PostsService } from '../posts.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-post-create',
@@ -11,6 +12,7 @@ import { PostsService } from '../posts.service';
 export class PostCreateComponent implements OnInit{
   enteredTitle='';
   enteredContent='';
+  isPostSubmitted: boolean = false;
 //Output() enables components from outside to listen to our custom event, i.e from the component in which we are using app-post-create
  // @Output() postCreated=new EventEmitter();
   
@@ -22,7 +24,7 @@ export class PostCreateComponent implements OnInit{
   post;
   imageUrl;
 
-  constructor(postsService:PostsService,route:ActivatedRoute)       //ActivatedRoute gives info about the route we are currently in
+  constructor(postsService:PostsService,route:ActivatedRoute, private _snackbar: MatSnackBar)       //ActivatedRoute gives info about the route we are currently in
   {
     this.postsService=postsService;
     this.route=route;
@@ -78,8 +80,13 @@ export class PostCreateComponent implements OnInit{
   //  this.postCreated.emit(post);   
     if(this.mode==='create') 
       { 
-        console.log(this.form.value.image)
-        this.postsService.addPost(this.form.value.title,this.form.value.content,this.form.value.image); 
+        this.isPostSubmitted = this.postsService.addPost(this.form.value.title,this.form.value.content,this.form.value.image);
+        if(this.isPostSubmitted === false ){
+          this._snackbar.open('Post submission','Failed!')
+        }
+        else{
+          this._snackbar.open('Post Create','Sucessfully!')
+        }
       }
     else
       this.postsService.updatePost(this.postId,this.form.value.title,this.form.value.content,this.form.value.image);   

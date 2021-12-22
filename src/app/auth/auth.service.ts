@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 export class AuthService{
   private token: string;
   isAuthenticated=false;
-  private authStatusListener=new Subject<boolean>();
+  private authStatusListener= new Subject<boolean>();
   userId : string;
   emailId : string;
   fname : string;
@@ -93,7 +93,7 @@ export class AuthService{
       this.isAuthenticated=false;
       this.authStatusListener.next(false);
       this.userId=null;
-      this.router.navigate(['/landing']);
+      this.router.navigate(['']);
   }
 
   autoAuthenticateUser(){

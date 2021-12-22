@@ -3,16 +3,18 @@ import { HttpClient } from "@angular/common/http";
 import { Subject } from 'rxjs';
 import { Router } from "@angular/router";
 
+
 /*Making PostsService injectable means that only one instance of PostsService would be used throughout the session
  This ensures that only one copy of all variables and methods of PostsService exist and thus changes would be 
  reflected throughout the session. We can also add PostsService in providers[] at app.component, this would do the same*/
 @Injectable({providedIn:'root'}) 
 export class PostsService
 {
+    receivedMessage: any;
     private posts =[];
     private postsUpdated=new Subject<{posts: any, postCount : number}>();
 
-    constructor(private http : HttpClient,private router : Router){}
+    constructor(private http : HttpClient,private router : Router ){}
 
     getPost(id:String){
         return {...this.posts.find(p=>p._id===id)}
@@ -60,8 +62,7 @@ export class PostsService
         //This can only be observed i.e listened from outside, not modified
         return this.postsUpdated.asObservable();    
     }
-    addPost(title : string, content : string,image : File)
-    {   
+    addPost(title : string, content : string,image : File): boolean{   
         console.log("Reached here");
         const postData=new FormData();
         postData.append('title', title);
@@ -70,8 +71,12 @@ export class PostsService
 
         this.http.post<{message : String, post : any}>('http://localhost:5000/api/posts',postData)
             .subscribe((responseData)=>{
-                this.router.navigate(['/']);
+                this.receivedMessage = responseData.message;
+                this.router.navigate(['/home']);
               });  
+              if( this.receivedMessage === "Post Added Successfully"){
+                  return true;
+              }
     }
     deletePost(id : String){
         return this.http.delete('http://localhost:5000/api/posts/'+id);         

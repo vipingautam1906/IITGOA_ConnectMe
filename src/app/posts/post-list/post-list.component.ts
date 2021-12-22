@@ -34,8 +34,7 @@ pageSizeOptions=[1,2,5,10];
  ngOnInit(){
   this.postsService.getPosts(this.postsPerPage,this.pageNumber);
   this.userId=this.authService.getUserId();
-   /*subscribe is used to register the given observer to the list of observers, When next would be called
-    from the subject it is registered with, the value would be fed here */
+   
    this.postSubs=this.postsService.getPostsUpdated()
            .subscribe((postData : {posts : any, postCount : number})=>{
              this.posts=postData.posts;

@@ -13,18 +13,23 @@ ul{
 
 li{
   margin-left: 1em;
+  font-size: large;
 }
 
 .spacer{
     flex : 1 1 auto;
 }
 
-.mat-toolbar.mat-primary {
-    background: #00000056;
-    color: #fff;
+  img{
+    padding-top: 25px;
+    width: 130px;   
   }
 
-  img{
-    padding-top: 3px;
-    width:150px;   
+  .mybuttons{
+    font-size: large;
+  }
+  .mat-toolbar.mat-primary {
+    background: #24262b;
+    color: #fff;
+    
   }

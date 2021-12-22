@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
@@ -8,6 +8,7 @@ import { AuthService } from '../auth/auth.service';
   styleUrls :['./header.component.css']
 })
 export class HeaderComponent implements OnInit,OnDestroy{
+
   userIsAuthenticated=false;
   private authListenerSubs: Subscription;
   msgfromLeftpanel = ""
@@ -15,6 +16,7 @@ export class HeaderComponent implements OnInit,OnDestroy{
 
   ngOnInit(){
     this.userIsAuthenticated=this.authService.getAuthentication();
+    console.log(this.userIsAuthenticated)
     this.authListenerSubs=this.authService
         .getAuthStatusListener()
         .subscribe(isAuthenticated=>{
@@ -24,6 +26,7 @@ export class HeaderComponent implements OnInit,OnDestroy{
 
   onLogout(){
     this.authService.logout();
+    localStorage.clear();
   }
 
   onclickleftsidepanel(value: string){
@@ -38,5 +41,12 @@ export class HeaderComponent implements OnInit,OnDestroy{
     this.authListenerSubs.unsubscribe();
   }
 
+  goToLink(url: string){
+    window.open(url, "_blank");
+  }
 
 }
+function MatMenuTrigger(MatMenuTrigger: any) {
+  throw new Error('Function not implemented.');
+}
+
